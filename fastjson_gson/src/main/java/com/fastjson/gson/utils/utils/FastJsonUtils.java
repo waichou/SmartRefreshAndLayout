@@ -5,9 +5,11 @@ import android.text.TextUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zhouwei on 2018/8/29.
@@ -20,7 +22,7 @@ public class FastJsonUtils {
      * @param note       节点
      * @return 节点对应的内容
      */
-    public static String getNoteJson(String jsonString, String note) {
+    public static String getNoteJson(String jsonString, String note) {//
         if (!TextUtils.isEmpty(jsonString) && !TextUtils.isEmpty(note)) {
             try {
                 JSONObject object = JSONObject.parseObject(jsonString);
@@ -40,7 +42,7 @@ public class FastJsonUtils {
      * @param beanClazz  要封装成的目标对象
      * @return 目标对象
      */
-    public static <T> T parserObject(String jsonString, String note, Class<T> beanClazz) {
+    public static <T> T parserObject(String jsonString, String note, Class<T> beanClazz) {//
         if (jsonString != null) {
             String noteJson = getNoteJson(jsonString, note);
             T object = JSON.parseObject(noteJson, beanClazz);
@@ -56,7 +58,7 @@ public class FastJsonUtils {
      * @param beanClazz  集合里存入的数据对象
      * @return 含有目标对象的集合
      */
-    public static <T> List<T> parserArray(String jsonString, String note, Class<T> beanClazz) {
+    public static <T> List<T> parserArray(String jsonString, String note, Class<T> beanClazz) {//
         if (!TextUtils.isEmpty(jsonString) && !TextUtils.isEmpty(note)) {
             List<T> objects = new ArrayList<T>();
             String noteJson = getNoteJson(jsonString, note);
@@ -72,12 +74,27 @@ public class FastJsonUtils {
     }
 
     /**
+     * 把相对应节点的内容封装为对象
+     *
+     * @param jsonString json字符串
+     * @param beanClazz  要封装成的目标对象
+     * @return 目标对象
+     */
+    public static <K, V> Map<K, V> parserJsonForMap(String jsonString, Class beanClazz) {//
+        if (jsonString != null) {
+            Map<K, V> map = (Map<K, V>) JSON.parseObject(jsonString, new TypeReference<Map<K, V>>() {});
+            return map;
+        }
+        return null;
+    }
+
+    /**
      * 把对象转化为json字符串
      *
      * @param obj 要转化的对象
      * @return 返回json字符串
      */
-    public static String toJsonString(Object obj) {
+    public static String toJsonString(Object obj) {//
         if (obj != null) {
             return JSON.toJSONString(obj);
         } else {

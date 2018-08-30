@@ -8,6 +8,11 @@ public class User {
     public String username;
     public int age;
 
+    //特别注意fastJson需要默认构造
+    public User(){
+
+    }
+
     public String getUsername() {
         return username;
     }

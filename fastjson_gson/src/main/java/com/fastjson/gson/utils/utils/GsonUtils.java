@@ -118,7 +118,7 @@ public class GsonUtils {
      * @param obj bean对象
      * @return 返回的是json字符串
      */
-    public static String toJsonString(Object obj){
+    public static String toJsonString(Object obj){//
         if(obj!=null){
             return new Gson().toJson(obj);
         }else{
@@ -132,9 +132,17 @@ public class GsonUtils {
      * @param json
      * @return
      */
-    public static <K, V> Map<K, V> parseJsonToMap(String json) {
-        Map<K, V> map2 = new Gson().fromJson(json, new TypeToken<Map<K, V>>() { }.getType());
-        return map2;
+    public static <K, V> Map<K, V> parseJsonToMap(String json) {//
+        Map<K, V> map = new Gson().fromJson(json, new TypeToken<Map<K, V>>() { }.getType());
+        return map;
     }
 
+
+    public static <T> T jsonString2Bean(String jsonString, Class<T> beanClazz) {
+        if (jsonString == null) {
+            return null;
+        }
+        T object = new Gson().fromJson(jsonString, beanClazz);
+        return object;
+    }
 }

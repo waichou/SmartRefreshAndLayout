@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.fastjson.gson.utils.utils.FastJsonUtils;
 import com.fastjson.gson.utils.utils.GsonUtils;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void getElementValueClick(View view) {
+    public void getValueForGsonClick(View view) {
         String json = "{\"username\":\"zhangsan\",\"age\":28}";
         String username = GsonUtils.getNoteJsonString(json, "username");
 
@@ -77,6 +78,58 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("toListJsonStr=" + toListJsonStr);//[{"username":"aaa","age":11},{"username":"bbb","age":12}]
         System.out.println("toMapJsonStr=" + toMapJsonStr);//{"111":{"username":"xxx","age":11},"222":{"username":"www","age":12}}
         System.out.println("toUserJsonStr=" + toUserJsonStr);//{"username":"zhouwei","age":27}
+
+    }
+
+    public void getValueForFastJsonClick(View view) {
+        String json = "{\"username\":\"zhangsan\",\"age\":28}";
+        String username = FastJsonUtils.getNoteJson(json, "username");
+
+        String jsonObj = "{\"code\":0,\"result\":{\"username\":\"aaa\",\"age\":12}}";
+        String code = FastJsonUtils.getNoteJson(jsonObj,"code");
+        if ("0".equals(code)){
+            User user = FastJsonUtils.parserObject(jsonObj, "result",User.class);
+            System.out.println("user=" + user.toString());//User{username='aaa', age=12}
+        }
+
+
+        //--------将JSON转换成集合对象-----------start
+        String jsonArr = "{\"code\":0,\"result\":[{\"username\":\"aaa\",\"age\":12},{\"username\":\"bbb\",\"age\":13}]}";
+        String codeArr = FastJsonUtils.getNoteJson(jsonArr,"code");
+        if ("0".equals(codeArr)){
+            List<User> userList = FastJsonUtils.parserArray(jsonArr,"result", User.class);
+            System.out.println("user1=" + userList.toString());//[User{username='aaa', age=12}, User{username='bbb', age=13}]
+        }
+
+        //第二种 - Map：
+        String jsonMap = "{\"111\":{\"username\":\"xxx\",\"age\":11},\"222\":{\"username\":\"www\",\"age\":12}}";
+        Map<String, User> objectObjectMap = FastJsonUtils.parserJsonForMap(jsonMap,User.class);
+        System.out.println("map=" + objectObjectMap);//{111={username=xxx, age=11.0}, 222={username=www, age=12.0}}
+
+
+        //--------将对象（List，Map，Object）转换成Json-----------start
+
+        //1.转换List<User>
+        List<User> toUserList = new ArrayList<>();
+        toUserList.add(new User("aaa",11));
+        toUserList.add(new User("bbb",12));
+        String toListJsonStr = FastJsonUtils.toJsonString(toUserList);
+
+        //2.转换Map<String,User>
+        Map<String,User> map = new HashMap<>();
+        map.put("111",new User("xxx",11));
+        map.put("222",new User("www",12));
+
+        String toMapJsonStr = GsonUtils.toJsonString(map);
+
+        //3.转换Object
+        User toUser = new User("zhouwei",27);
+        String toUserJsonStr = GsonUtils.toJsonString(toUser);
+
+        System.out.println("toListJsonStr=" + toListJsonStr);//[{"username":"aaa","age":11},{"username":"bbb","age":12}]
+        System.out.println("toMapJsonStr=" + toMapJsonStr);//{"111":{"username":"xxx","age":11},"222":{"username":"www","age":12}}
+        System.out.println("toUserJsonStr=" + toUserJsonStr);//{"username":"zhouwei","age":27}
+
 
     }
 }

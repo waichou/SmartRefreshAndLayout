@@ -10,7 +10,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="getElementValueClick"
-        android:text="获取元素值" />
+        android:onClick="getValueForGsonClick"
+        android:text="获取元素值 By Gson" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="getValueForFastJsonClick"
+        android:text="获取元素值 By FastGson" />
 
 </LinearLayout>
