@@ -5,7 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="photoview.com.smartrefreshandlayout.MainActivity">
+    tools:context="photoview.com.smartrefreshandlayout.activity.FragmentAdapterActivity">
+
+    <!--
+         stl_indicatorAlwaysInCenter                  设置为true，活动标签总是显示在中心，也就是移动之后标签居中； false 显示在靠左边缘
+         stl_indicatorInFront                         在下划线前画指示器，默认为false (没测试出来)
+
+         stl_indicatorInterpolation="linear|smart"    linear表示等分指示器，smart伸缩指示器
+         stl_indicatorColor                           设置指示器标签颜色
+         stl_indicatorThickness                       指示器厚度
+         stl_indicatorWidth                           指示器的宽度，默认“自动”
+         stl_indicatorCornerRadius                    指示器的圆角指示器
+         stl_underlineColor                           指示器的颜色
+         stl_underlineThickness                       指示器的厚度
+         stl_dividerColor                             标签分割线的颜色
+         stl_dividerThickness                         标签分割线的宽度
+         stl_defaultTabTextAllCaps	                  如果设置为TRUE，所有标签标题将大写，默认为真
+         stl_distributeEvenly	                      如果设置为true，每个选项卡得到相同的重量，即平均分配；默认FALSE
+    -->
 
     <com.ogaclejapan.smarttablayout.SmartTabLayout
         android:id="@+id/viewpagertab"
@@ -14,19 +31,21 @@
         app:stl_indicatorAlwaysInCenter="false"
         app:stl_indicatorInFront="false"
         app:stl_indicatorInterpolation="smart"
-        app:stl_indicatorColor="#40C4FF"
+        app:stl_indicatorColor="#FF0000"
         app:stl_indicatorThickness="4dp"
         app:stl_indicatorCornerRadius="2dp"
-        app:stl_underlineColor="#4D000000"
-        app:stl_underlineThickness="1dp"
-        app:stl_dividerColor="#4D000000"
+
+        app:stl_underlineColor="#ff00ff"
+        app:stl_underlineThickness="2dp"
+
+        app:stl_dividerColor="@android:color/transparent"
         app:stl_dividerThickness="1dp"
+
         app:stl_defaultTabTextAllCaps="true"
-        app:stl_defaultTabTextColor="#FC000000"
-        app:stl_defaultTabTextSize="12sp"
-        app:stl_defaultTabTextHorizontalPadding="16dp"
-        app:stl_defaultTabTextMinWidth="0dp"
-        app:stl_distributeEvenly="false"
+        app:stl_defaultTabTextColor="#000000"
+        app:stl_defaultTabTextSize="20sp"
+        app:stl_defaultTabTextHorizontalPadding="20dp"
+        app:stl_distributeEvenly="true"
         />
 
     <android.support.v4.view.ViewPager

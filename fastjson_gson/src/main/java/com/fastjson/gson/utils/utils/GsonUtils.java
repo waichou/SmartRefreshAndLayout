@@ -31,7 +31,7 @@ public class GsonUtils {
      * @param note 节点
      * @return 节点对应的内容
      */
-    public static String getNoteJsonString(String jsonString,String note){
+    public static String getNoteJsonString(String jsonString,String note){//
         if(TextUtils.isEmpty(jsonString)){
             throw new RuntimeException("json字符串");
         }
@@ -52,7 +52,7 @@ public class GsonUtils {
      * @param beanClazz 要转化成的bean class
      * @return 返回bean的数组
      */
-    public static <T> List<T> parserJsonToArrayBeans(String jsonString,String note,Class<T> beanClazz){
+    public static <T> List<T> parserJsonToArrayBeans(String jsonString,String note,Class<T> beanClazz){//
         String noteJsonString = getNoteJsonString(jsonString,note);
         return parserJsonToArrayBeans(noteJsonString,beanClazz);
     }
@@ -62,7 +62,7 @@ public class GsonUtils {
      * @param beanClazz 集合里存入的数据对象
      * @return 含有目标对象的集合
      */
-    public static <T> List<T> parserJsonToArrayBeans(String jsonString,Class<T> beanClazz){
+    public static <T> List<T> parserJsonToArrayBeans(String jsonString,Class<T> beanClazz){//
         if(TextUtils.isEmpty(jsonString)){
             throw new RuntimeException("json字符串为空");
         }
@@ -88,7 +88,7 @@ public class GsonUtils {
      * @param clazzBean  要封装成的目标对象
      * @return 目标对象
      */
-    public static <T> T parserJsonToArrayBean(String jsonString,Class<T> clazzBean){
+    public static <T> T parserJsonToArrayBean(String jsonString,Class<T> clazzBean){//
         if(TextUtils.isEmpty(jsonString)){
             throw new RuntimeException("json字符串为空");
         }
@@ -108,7 +108,7 @@ public class GsonUtils {
      * @param clazzBean 集合里存入的数据对象
      * @return 含有目标对象的集合
      */
-    public static <T> T parserJsonToArrayBean(String jsonString,String note,Class<T> clazzBean){
+    public static <T> T parserJsonToArrayBean(String jsonString,String note,Class<T> clazzBean){//
         String noteJsonString = getNoteJsonString(jsonString, note);
         return parserJsonToArrayBean(noteJsonString, clazzBean);
     }
@@ -132,8 +132,9 @@ public class GsonUtils {
      * @param json
      * @return
      */
-    public static <K, V> Map<K, V> stringToMap(String json) {
+    public static <K, V> Map<K, V> parseJsonToMap(String json) {
         Map<K, V> map2 = new Gson().fromJson(json, new TypeToken<Map<K, V>>() { }.getType());
         return map2;
     }
+
 }
